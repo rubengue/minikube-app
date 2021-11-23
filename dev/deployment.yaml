@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: myapp-demo
+  name: myapp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: myapp-demo
+    spec:
+      containers:
+      - image: nanajanashia/argocd-app:1.0
+        name: casexploration
+        resources: {}
+status: {}
