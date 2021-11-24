@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: guestbook-git-dir-appset
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/rubenguev/applicationset.git
+      revision: HEAD
+      directories:
+      - path: examples/git-generator-directory/guestbook-example-apps/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/rubengue/applicationset.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
