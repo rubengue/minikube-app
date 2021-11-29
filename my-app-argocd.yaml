@@ -1,0 +1,120 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"myapp-argo-application","namespace":"argocd"},"spec":{"destination":{"namespace":"myapp","server":"https://kubernetes.default.svc"},"project":"default","source":{"path":"dev","repoURL":"https://github.com/rubengue/minikube-app","targetRevision":"HEAD"},"syncPolicy":{"automated":{"prune":true,"selfHeal":true},"syncOptions":["CreateNamespace=true"]}}}
+  creationTimestamp: "2021-11-26T13:16:26Z"
+  generation: 12
+  name: myapp-argo-application
+  namespace: argocd
+  resourceVersion: "31313"
+  uid: 2cfeed2f-5f52-42fd-b328-91d4c69053b8
+spec:
+  destination:
+    namespace: myapp
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dev
+    repoURL: https://github.com/rubengue/minikube-app
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+status:
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2021-11-26T13:16:27Z"
+    deployedAt: "2021-11-26T13:16:32Z"
+    id: 0
+    revision: fd53f6a4c4f559a130074303f8f00ce91d7458d4
+    source:
+      path: dev
+      repoURL: https://github.com/rubengue/minikube-app
+      targetRevision: HEAD
+  operationState:
+    finishedAt: "2021-11-26T13:16:32Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: fd53f6a4c4f559a130074303f8f00ce91d7458d4
+        syncOptions:
+        - CreateNamespace=true
+    phase: Succeeded
+    startedAt: "2021-11-26T13:16:27Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Succeeded
+        kind: Namespace
+        message: namespace/myapp created
+        name: myapp
+        namespace: ""
+        status: Synced
+        syncPhase: PreSync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/rubspace-app created
+        name: rubspace-app
+        namespace: myapp
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/myapp-demo created
+        name: myapp-demo
+        namespace: myapp
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: fd53f6a4c4f559a130074303f8f00ce91d7458d4
+      source:
+        path: dev
+        repoURL: https://github.com/rubengue/minikube-app
+        targetRevision: HEAD
+  reconciledAt: "2021-11-26T13:20:16Z"
+  resources:
+  - health:
+      status: Healthy
+    kind: Service
+    name: rubspace-app
+    namespace: myapp
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: myapp-demo
+    namespace: myapp
+    status: Synced
+    version: v1
+  sourceType: Directory
+  summary:
+    images:
+    - nanajanashia/argocd-app:1.0
+  sync:
+    comparedTo:
+      destination:
+        namespace: myapp
+        server: https://kubernetes.default.svc
+      source:
+        path: dev
+        repoURL: https://github.com/rubengue/minikube-app
+        targetRevision: HEAD
+    revision: fd53f6a4c4f559a130074303f8f00ce91d7458d4
+    status: Synced
